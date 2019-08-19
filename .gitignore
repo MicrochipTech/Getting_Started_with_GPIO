@@ -1,0 +1,7 @@
+*/dist
+*/debug
+*/build
+*/nbproject/*
+!*/nbproject/project.properties
+!*/nbproject/project.xml
+!*/nbproject/configurations.xml
