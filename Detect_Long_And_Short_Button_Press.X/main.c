@@ -40,38 +40,42 @@ inline void LED_blink(uint32_t delay);
 
 int main(void)
 {
-    uint8_t counter =   0;
-    
-	PORTB.DIRCLR	=	PIN2_bm;				/* set PB2 as input */
-    PORTB.DIRSET    =   PIN5_bm;                /* set PB5 as output */
-	PORTB.PIN2CTRL	=	PORT_PULLUPEN_bm;		/* enable internal pull-up */
+    uint8_t counter = 0;
+
+    PORTB.DIRCLR = PIN2_bm; /* set PB2 as input */
+    PORTB.DIRSET = PIN5_bm; /* set PB5 as output */
+    PORTB.PIN2CTRL = PORT_PULLUPEN_bm; /* enable internal pull-up */
 
     while (1)
     {
-		if(~PORTB.IN & PIN2_bm)					/* check if PB2 is pulled to GND */
-		{
-			while(~PORTB.IN & PIN2_bm)			/* wait until PB2 is pulled to VDD */
-			{
-				_delay_ms(STEP_DELAY);
-				counter++;
-                if(counter >= THRESHOLD)
+        if (~PORTB.IN & PIN2_bm) /* check if PB2 is pulled to GND */
+        {
+            while (~PORTB.IN & PIN2_bm) /* wait until PB2 is pulled to VDD */
+            {
+                _delay_ms(STEP_DELAY);
+                counter++;
+                if (counter >= THRESHOLD)
                 {
                     LED_blink(LONG_DELAY);
+                    while (~PORTB.IN & PIN2_bm) /* wait until PB2 is pulled to VDD */
+                    {
+                        ;
+                    }
                     break;
                 }
-			}
-			if(counter < THRESHOLD)
-			{
+            }
+            if (counter < THRESHOLD)
+            {
                 LED_blink(SHORT_DELAY);
             }
-			counter = 0;
-		}
+            counter = 0;
+        }
     }
 }
 
 inline void LED_blink(uint32_t time_ms)
 {
-    for(uint8_t i = 0 ; i < NUMBER_OF_BLINKS ; i++)
+    for (uint8_t i = 0; i < NUMBER_OF_BLINKS; i++)
     {
         PORTB.OUT |= PIN5_bm;
         _delay_ms(time_ms);
