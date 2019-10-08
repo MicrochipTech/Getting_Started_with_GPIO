@@ -1,7 +1,7 @@
 ATmega4809 GPIO Examples
 ===
 
-This repository contains examples of bare metal source code for GPIO .
+This repository contains examples of bare metal source code for GPIO as described in [Getting Started with GPIO](http://ww1.microchip.com/downloads/en/Appnotes/90003229A.pdf) document from Microchip.
 The repository contains three MPLAB X projects. Make sure you have the necessary tools:
 1. ATmega4809 device (recommended is evaluation board ATmega4809 X-plained PRO)
 2. MPLAB X or MPLAB Xpress
